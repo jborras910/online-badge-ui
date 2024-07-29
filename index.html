@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!--font awesome icon-->
+    <script
+      src="https://kit.fontawesome.com/6cea1e7bdb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .navbar-toggler {
+        border: 0px !important;
+        font-size: 32px !important;
+        outline: none !important;
+      }
+      .navbar {
+        z-index: 1000;
+        background-color: #062a5e !important;
+        /* padding: 20px 0px !important; */
+        border-bottom: 2px solid rgba(22, 22, 26, 0.18);
+        box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2) !important;
+      }
+      .navbar .nav-link {
+        color: #fff !important;
+        margin-left: 20px !important;
+        font-weight: 600 !important;
+      }
+      .navbar .nav-link:hover {
+        color: #efa401 !important;
+        transition: 0.4s !important;
+      }
+      @media screen and (max-width: 1000px) {
+        .navbar {
+          padding: 20px !important;
+        }
+
+        .navbar .nav-link {
+          margin: 0px !important;
+        }
+      }
+
+      /* Sidebar styling */
+      .sidebar {
+        margin-top: 27% !important;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 70%;
+        height: 100%;
+        background-color: #062a5e;
+        transition: left 0.3s;
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 20px !important;
+      }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .sidebar .close-btn i {
+        border: 0px !important;
+        font-size: 28px !important;
+        outline: none !important;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body.sidebar-open {
+        overflow: hidden;
+      }
+      .navbar-brand img {
+        width: 120px;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      /* Ensure nav links are displayed normally on desktop */
+      @media (min-width: 992px) {
+        .sidebar {
+          display: none;
+        }
+        .navbar-nav {
+          display: flex;
+        }
+      }
+
+      @media (max-width: 991.98px) {
+        .navbar-nav {
+          display: none;
+        }
+        .sidebar.show .navbar-nav {
+          display: block;
+        }
+        .sidebar .nav-item {
+          margin-bottom: 8px !important;
+        }
+        .sidebar .nav-item .nav-link {
+          padding: 14px !important;
+        }
+        .sidebar .nav-item .active {
+          background-color: #ffb310c1 !important;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+        .navbar-brand img {
+          width: 100px;
+          padding: 0px;
+          margin: 0px;
+        }
+      }
+
+      /* Overlay to handle clicks outside the sidebar */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 999;
+      }
+
+      .overlay.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay" id="overlay"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          ><img
+            src="https://www.worldciti.edu.ph/frontend/images/wc_logo_497x265.png"
+            alt=""
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          onclick="toggleSidebar()"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa-solid fa-bars" id="icon-nav" style="color: #ffb310"></i>
+        </button>
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Certificate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Badge</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+          <!-- <div>
+            <a class="close-btn btn" onclick="toggleSidebar()">
+              <i class="fa-solid fa-xmark" style="color: #ffb310"></i>
+            </a>
+          </div> -->
+
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"
+                ><i class="fa-solid fa-user mr-2"></i>Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-certificate mr-2"></i>Certificate</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-ribbon mr-2"></i>Badge</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function toggleSidebar() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+        var icon_nav = document.getElementById("icon-nav");
+        sidebar.classList.toggle("show");
+        overlay.classList.toggle("show");
+
+        if (sidebar.classList.contains("show")) {
+          document.body.classList.add("sidebar-open");
+          icon_nav.classList = "fa-solid fa-xmark";
+        } else {
+          document.body.classList.remove("sidebar-open");
+          icon_nav.classList = "fa-solid fa-bars";
+        }
+      }
+
+      document.getElementById("overlay").addEventListener("click", function () {
+        toggleSidebar();
+      });
+    </script>
+  </body>
+</html>
